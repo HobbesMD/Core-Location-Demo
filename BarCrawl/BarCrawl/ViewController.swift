@@ -149,10 +149,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func permissionsEnabled(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func finishedCrawl() {
         self.performSegue(withIdentifier: "finishedSegue", sender: nil)
         LOCATION_MANAGER.stopUpdatingLocation()
@@ -202,18 +198,8 @@ extension ViewController : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if (region.identifier == currentBar?.region.identifier && currentBar!.visited) {
-            // Stop monitoring current bar when user leaves bar
-            currentBar?.region.notifyOnEntry = false
-            currentBar?.region.notifyOnExit = false
-            LOCATION_MANAGER.stopMonitoring(for: (currentBar?.region)!)
-            
+        if (region.identifier == currentBar?.region.identifier) {
             index += 1
-            if (index >= bars.count) {
-                finishedCrawl()
-                return
-            }
-            
             setCurrentBar(barIndex: index)
         }
         else {
