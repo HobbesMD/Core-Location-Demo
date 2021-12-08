@@ -31,11 +31,28 @@ This tutorial assumes a basic understanding of creating interfaces using Storybo
 
 ### Layout
 
+This app utilizes three views. The main view is layed out as follows:
+
+
+The Previous and Next Bar are buttons, as well as the Check In. Visited, Completed, Next Bar, and the name of the next bar are all labels. The blue rectangle in the middle of the screen is a MapView.
+
+
+There is an unauthorized view (presented modally) to demonstrate recognizing when the app does not have access to the user's location:
+
+
+Finally a modal view for when the user completes the bar crawl:
+
 
 
 ### Location Manager
 
+#### Asking for Permission
 
+#### Getting User Location
+
+#### Region Monitoring
+
+### MapView
 
 
 
@@ -69,7 +86,7 @@ There are no alternatives to getting the user's location other than using Core L
 
 ### Supplements
 
-If this tutorial/project has interested you and you wish to experiment more with Core Location, one should look at integrating Core Location with [MapKit](https://developer.apple.com/documentation/mapkit/). We utilized MapView from MapKit in a very basic way, but there is much more to MapKit and the two frameworks can do a lot of cool things together. 
+If this tutorial/project has interested you and you wish to experiment more with Core Location, one should look at integrating Core Location with [MapKit](https://developer.apple.com/documentation/mapkit/). We utilized MapView from MapKit in a very basic way, but there is much more to MapKit and the two frameworks can do a lot of cool things together. Additionally, there are two more features included in Core Location that were not covered in this app. They are Beacon Ranging, [which deals with locating nearby beacons](https://developer.apple.com/documentation/corelocation/ranging_for_beacons), and Compass Heading, [which provides information about the device's relation to true north](https://developer.apple.com/documentation/corelocation/getting_heading_and_course_information).
 
 ### Source Code
 
