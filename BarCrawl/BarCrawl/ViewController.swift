@@ -188,6 +188,8 @@ extension ViewController : CLLocationManagerDelegate {
         }
         else {
             LOCATION_MANAGER.startUpdatingLocation()
+            userLocation = LOCATION_MANAGER.location
+            updateCheckInEnabled()
         }
     }
     
