@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A942239E275561B100D722C0 /* UnauthorizedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942239D275561B100D722C0 /* UnauthorizedController.swift */; };
 		A971F7252742A002000E9E2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971F7242742A002000E9E2B /* AppDelegate.swift */; };
 		A971F7272742A002000E9E2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971F7262742A002000E9E2B /* SceneDelegate.swift */; };
 		A971F7292742A002000E9E2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971F7282742A002000E9E2B /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A942239D275561B100D722C0 /* UnauthorizedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedController.swift; sourceTree = "<group>"; };
 		A971F7212742A002000E9E2B /* BarCrawl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BarCrawl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A971F7242742A002000E9E2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A971F7262742A002000E9E2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				A971F72F2742A005000E9E2B /* LaunchScreen.storyboard */,
 				A971F7322742A005000E9E2B /* Info.plist */,
 				A971F7582742C03E000E9E2B /* CrawlLocation.swift */,
+				A942239D275561B100D722C0 /* UnauthorizedController.swift */,
 			);
 			path = BarCrawl;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				A971F7292742A002000E9E2B /* ViewController.swift in Sources */,
 				A971F7252742A002000E9E2B /* AppDelegate.swift in Sources */,
 				A971F7592742C03E000E9E2B /* CrawlLocation.swift in Sources */,
+				A942239E275561B100D722C0 /* UnauthorizedController.swift in Sources */,
 				A971F7272742A002000E9E2B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

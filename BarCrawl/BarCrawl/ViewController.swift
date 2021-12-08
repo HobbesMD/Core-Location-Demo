@@ -149,6 +149,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func permissionsEnabled(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func finishedCrawl() {
         self.performSegue(withIdentifier: "finishedSegue", sender: nil)
         LOCATION_MANAGER.stopUpdatingLocation()
