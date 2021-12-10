@@ -5,6 +5,7 @@
 
 Core Location is a iOS framework used to track user's location. The framework provides functionality to request access to the user's location, fetch user location, receive updates when user moves or enters a specified area, and more. The demo app used to demostrate some of this functionality is a bar crawl app used to verify that the user has visited the necessary locations. 
 
+![Demo.gif](/Assets/Demo.gif)
 
 
 ## Getting Started
@@ -32,16 +33,23 @@ This tutorial assumes a basic understanding of creating interfaces using Storybo
 ### Layout
 
 This app utilizes three views. The main view is layed out as follows:
-![Main View]()
+
+<img src="/Assets/MainView.png" alt="MainView" height="600"/>
 
 The Previous and Next Bar are buttons, as well as the Check In. Visited, Completed, Next Bar, and the name of the next bar are all labels. The blue rectangle in the middle of the screen is a MapView.
 
 
 There is a modal unauthorized view (presented modally) to demonstrate recognizing when the app does not have access to the user's location:
-![Unauthorized View]()
+
+<img src="/Assets/UnauthorizedView.png" alt="UnauthorizedView" height="600"/>
 
 Finally another modal view for when the user completes the bar crawl:
-![Completion View]()
+
+<img src="/Assets/FinishedView.png" alt="FinishedView" height="600"/>
+
+And all of them together:
+
+<img src="/Assets/FullStoryboard.png" alt="FullStoryboard" height="600"/>
 
 ### Bars
 
@@ -125,7 +133,50 @@ func setCurrentBar(barIndex: Int) {
 }
 ```
 
+And while we're at it let's add our IBActions so we can navigate between bars with our buttons:
+```
+@IBAction func previousBar(_ sender: Any) {
+    if (index > 0) {
+        index -= 1
+        setCurrentBar(barIndex: index)
+    }
+}
 
+@IBAction func nextBar(_ sender: Any) {
+    if (index < bars.count - 1) {
+        index += 1
+        setCurrentBar(barIndex: index)
+    }
+}
+```
+
+And of course we need a check-in button where the user will be prompted to enter a unique code for each bar that they will receive upon beverage purchase.
+```
+@IBAction func checkIn(_ sender: Any) {
+    let alert = UIAlertController(title: "\(currentBar!.name ?? "Passcode")", message: "Enter Code", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Enter", style: .default, handler: { [self] _ in
+        if (currentBar?.code != alert.textFields![0].text) {
+            return
+        }
+
+        bars[index].visited = true
+
+        index += 1
+        if (index >= bars.count) {
+            finishedCrawl()
+            return
+        }
+
+        setCurrentBar(barIndex: index)
+    }))
+    alert.addTextField(configurationHandler: {(textField: UITextField!) in
+        textField.placeholder = "Code"
+    })
+    self.present(alert, animated: true, completion: nil)
+}
+```
+
+<img src="/Assets/Passcode.png" alt="Passcode" width="300"/>
 
 ### Location Manager
 
@@ -166,6 +217,9 @@ if (!isAuthorized()) {
     LOCATION_MANAGER.requestWhenInUseAuthorization()
 }
 ```
+
+
+<img src="/Assets/PermissionPrompt.png" alt="PermissionPrompt" height="600"/>
 
 Next we need to implement the isAuthorized() method we just referenced. We will use this method to determine if we are able to get the user's location.
 ```
@@ -229,11 +283,80 @@ func finishedCrawl() {
 
 #### Region Monitoring
 
-Now we want to get notified when the user enters or leaves the bar. We can do this through region monitoring. We have already created the regions for our bars, so now we just need to enable monitoring the current bar. 
+Now we want to get notified when the user enters or leaves the bar. We can do this through region monitoring. We have already created the regions for our bars, so now we just need to enable monitoring the current bar. The location manager will take of all the monitoring for us, all we have to do is indicate which region(s) we want monitored and implement the patterns for receiving enter and exit events. These methods are `func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion)` and `func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion)` and they will give us which region was entered/exited. From there we can update the status of the check-in button to reflect whether or not the user is at the correct location.
+
+```
+func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+    if (region.identifier == currentBar?.region.identifier) {
+        updateCheckInEnabled()
+    }
+}
+
+func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+    if (region.identifier == currentBar?.region.identifier) {
+        index += 1
+        setCurrentBar(barIndex: index)
+    }
+    else {
+        updateCheckInEnabled()
+    }
+}
+
+//... In regular ViewController.Swift
+func updateCheckInEnabled() {
+    if (currentBar!.visited) {
+        checkInButton.setTitle("Checked In!", for: .normal)
+    }
+    else {
+        checkInButton.setTitle("Check Me In!", for: .normal)
+    }
+    checkInButton.isEnabled = !currentBar!.visited && (userLocation != nil && currentBar!.region.contains(userLocation!.coordinate))
+}
+```
+
+The last bit we need to do for region monitoring to work is to start and stop monitoring when we switch the current bar. So at the beginning of `setCurrentBar(barIndex: Int)`, we need to add the following:
+```
+if (currentBar != nil) {
+    currentBar?.region.notifyOnEntry = false
+    currentBar?.region.notifyOnExit = false
+    LOCATION_MANAGER.stopMonitoring(for: (currentBar?.region)!)
+}
+
+currentBar = bars[barIndex]
+currentBar?.region.notifyOnEntry = true
+currentBar?.region.notifyOnExit = true
+
+LOCATION_MANAGER.startMonitoring(for: (currentBar?.region)!)
+```
+
 
 ### MapView
 
+This tutorial is about Core Location and this app would function without any sort of map, but it does make the app look better so we'll quickly update our MapView from the MapKit framework. I won't go into much detail about how MapView works but if you're interested, in addition to the Apple documentation, [raywanderlich.com](https://www.raywenderlich.com/7738344-mapkit-tutorial-getting-started) and [iosapptemplates.com](https://iosapptemplates.com/blog/swift-programming/mapkit-tutorial) both have great tutorials on learning more about maps in iOS.
 
+For our purposes, we just need to add the reference to the MKMapView in our ViewController: `@IBOutlet weak var mapView: MKMapView!`
+
+Then we want to configure it in our `viewDidLoad()`:
+```
+mapView.showsBuildings = true
+mapView.showsUserLocation = true
+mapView.isZoomEnabled = true
+```
+
+Then when we change bars we want the map to move to the current bar. So we remove the annotation with 
+```
+if (currentBar != nil) {
+    mapView.removeAnnotation(currentBar!.annotation)
+}
+``` 
+
+And then we can set the new region and our map should be working.
+
+```
+let region = MKCoordinateRegion( center: (currentBar?.region.center)!, latitudinalMeters: CLLocationDistance(exactly: 2000)!, longitudinalMeters: CLLocationDistance(exactly: 2000)!)
+mapView.setRegion(mapView.regionThatFits(region), animated: true)
+mapView.addAnnotation(currentBar!.annotation)
+```
 
 ### Testing
 
@@ -243,7 +366,9 @@ There are two ways to test this app. The first and most practical is to use Xcod
 
 With the simulator open and in the foreground, select *Features > Location > Custom Location*.
 
-This will open a window asking for a coordinate pair. 
+<img src="/Assets/SelectingCustomLocation.png" alt="SelectingCustomLocation" height="400"/>
+
+This will open a window asking for a coordinate pair.
 
 *There are also a few standard locations that Apple provides that could be used instead of custom locations if desired.*
 
