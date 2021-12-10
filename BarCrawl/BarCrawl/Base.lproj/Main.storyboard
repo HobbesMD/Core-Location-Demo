@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Crawler" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lq-wU-8lz">
-                                <rect key="frame" x="16" y="44" width="168" height="24"/>
+                                <rect key="frame" x="16" y="44" width="382" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -30,16 +30,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="2WA-IU-tct">
-                                <rect key="frame" x="16" y="809.5" width="168" height="52.5"/>
+                                <rect key="frame" x="16" y="809.5" width="382" height="52.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Location:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2G-Uk-Q2G">
-                                        <rect key="frame" x="0.0" y="0.0" width="168" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gws-5a-qAJ">
-                                        <rect key="frame" x="0.0" y="29.5" width="168" height="23"/>
+                                        <rect key="frame" x="0.0" y="29.5" width="382" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3P-Cf-qvG">
-                                <rect key="frame" x="100" y="438.5" width="0.0" height="31"/>
+                                <rect key="frame" x="100" y="421.5" width="214" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Check Me In!"/>
                                 <connections>
@@ -61,16 +61,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="BYp-nz-xUH">
-                                <rect key="frame" x="16" y="84" width="168" height="20.5"/>
+                                <rect key="frame" x="16" y="84" width="382" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Visited: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsP-w7-s24">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="172" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming: 10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBi-Ec-ZcE">
-                                        <rect key="frame" x="103" y="0.0" width="65" height="20.5"/>
+                                        <rect key="frame" x="210" y="0.0" width="172" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="170" id="xdn-ne-8Fn"/>
                                         </constraints>
@@ -84,16 +84,16 @@
                                 </constraints>
                             </stackView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mYc-rb-ua0">
-                                <rect key="frame" x="16" y="168.5" width="168" height="220"/>
+                                <rect key="frame" x="16" y="151.5" width="382" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="AFS-Fi-KUf"/>
                                 </constraints>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PfY-Fu-loL">
-                                <rect key="frame" x="16" y="112.5" width="168" height="48"/>
+                                <rect key="frame" x="16" y="112.5" width="382" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EDW-Vy-CIg">
-                                        <rect key="frame" x="0.0" y="0.0" width="66.5" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Previous Bar"/>
                                         <connections>
@@ -101,7 +101,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qL-ta-diq">
-                                        <rect key="frame" x="66.5" y="0.0" width="101.5" height="48"/>
+                                        <rect key="frame" x="138" y="0.0" width="244" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Next Bar"/>
                                         <connections>
